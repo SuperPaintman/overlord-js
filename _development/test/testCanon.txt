@@ -1,0 +1,27 @@
+Hi, Sasha
+Sasha ran 10 meters
+Sat by the fire Sasha, Lesha and Artem
+Not equivalent
+Equivalent
+We got 4 arguments
+We got 5 arguments
+No one variable
+Oops, custom call
+Hi, Sasha
+Sasha ran 10 meters
+Sat by the fire Sasha, Lesha and Artem
+Not equivalent
+Equivalent
+We got 4 arguments
+We got 5 arguments
+No one variable
+undefined
+Hi, Sasha
+Sasha ran 10 meters
+Sat by the fire Sasha, Lesha and Artem
+Not equivalent
+Equivalent
+We got 4 arguments
+We got 5 arguments
+No one variable
+Cannot read property 'apply' of undefined
