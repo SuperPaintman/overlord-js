@@ -1,6 +1,6 @@
 {
   "name": "overlord-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "function overloading",
   "main": "overlord.js",
   "author": {
@@ -33,6 +33,10 @@
     "src": "_development",
     "test": "test",
     "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperPaintman/overlord-js.git"
   },
   "license": "ISC",
   "devDependencies": {

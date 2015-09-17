@@ -101,7 +101,7 @@ console.log(say(1, [], false));                             // Oops, custom call
             * `null`- For zero variables 
         * `function` **function** - The called function, if types of arguments match
 * `function` **default** - **function()** If none of the options didn't approach then this function will be called. _default: `undefined`_
-* `boolean` **error** - If none of the option didn't approach, default function not defited and it set to true, will be emit event `Cannot read property 'apply' of undefined`
+* `boolean` **error** - If none of the option didn't approach, default function not defited and it set to true, will be emit event `Cannot read property 'apply' of undefined` . _default: `false`_
 
 ------------------------------------
 
