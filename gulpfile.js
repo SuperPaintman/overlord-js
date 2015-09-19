@@ -58,6 +58,15 @@ function loadPackageV( placeholder ) {
     return version;
 }
 
+/**
+ * Обрабатывает ошибки
+ * @param  {Error} err  - Ошибка
+ */
+function error(err) {
+    console.log(err.toString());
+    this.emit('end');
+}
+
 var paths = {
     client: {
         browserify: {
@@ -104,6 +113,7 @@ var paths = {
                 "!./_gulp.bat",
                 "!./*.md",
                 "!./gulpfile.js",
+                "!./.gitignore",
                 //"!./browser{,/**}",
             ], 
             to: "./_tmp/"
@@ -141,7 +151,7 @@ gulp.task('browserify', function(next) {
     var version = loadPackageV();
 
     gulp.src( paths.client.browserify.coffee.from )
-        .pipe(coffee({bare: true}).on('error', gutil.log))
+        .pipe(coffee({bare: true}).on('error', error))
         .pipe(browserify({
           insertGlobals: false,
           debug: false,
@@ -168,7 +178,7 @@ gulp.task('browserify', function(next) {
 \*          */
 gulp.task('dev-coffee', function(next) {
     gulp.src( paths.development.coffee.from )
-        .pipe(coffee({bare: true}).on('error', gutil.log))
+        .pipe(coffee({bare: true}).on('error', error))
         .pipe(gulp.dest( paths.development.coffee.to ))
         .on('finish', next);
 });
@@ -187,21 +197,21 @@ gulp.task('dev-jsdoc', function(next) {
 gulp.task('dev-tmp', function(next) {
     gulp.src( paths.development.tmp.from )
         .pipe(gulp.dest( paths.development.tmp.to ))
-        .on('error', gutil.log)
+        .on('error', error)
         .on('finish', next);
 });
 
 gulp.task('dev-clean', function(next) {
     gulp.src( paths.development.tmp.from, {read: false})
         .pipe(clean())
-        .on('error', gutil.log)
+        .on('error', error)
         .on('finish', next);
 });
 
 gulp.task('dev-clean-tmp', function(next) {
     gulp.src( paths.development.clean.from, {read: false})
         .pipe(clean())
-        .on('error', gutil.log)
+        .on('error', error)
         .on('finish', next);
 });
 
@@ -249,7 +259,7 @@ gulp.task('dev-test-mocha', function() {
             reporter: 'nyan',
             timeout: 2,
         }))
-        .on('error', gutil.log);
+        .on('error', error);
         //.on('end', next);
 });
 

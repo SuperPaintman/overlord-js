@@ -13,9 +13,7 @@
  * @param  {Boolean} error           - Вызывать ли ошибку, в случае, если ни один вариант не подходит и не установлен default вариант
  * @return {Function}                - Перегруженная функция
 ###
-overlord = (overloads, def, error)->
-    error = error ? false
-
+overlord = (overloads, def, error = false)->
     return ()->
         ###*
          * Функция, которая будет вызвана
@@ -28,6 +26,15 @@ overlord = (overloads, def, error)->
 
         # Обход всех перегрузов
         for overload, i in overloads
+            if overload?.func?
+                overload.function = overload.func
+
+            # Ошибки, если перегрузы объявлены неверно
+            if !overload?.args?
+                throw new Error("#{i + 1} overload hasn't arguments")
+            if !overload?.function?
+                throw new Error("#{i + 1} overload hasn't function")
+
             ###*
              * Найдена ли функция
              * @type {Boolean}
@@ -49,14 +56,35 @@ overlord = (overloads, def, error)->
             # Проверка на равность аргументов, возможность нефиксированных аргументов, или отсутствие их
             if (overargs.length == arguments.length) || (arguments.length > 0 && lastarg == '...') || (arguments.length == 0 && firstart == '...')
                 # Обход всех типов
-                for type, i in overargs
-                    # Проверка допускается ли любой тип переменной
-                    if type.constructor == String && type.toLowerCase() == 'any'
-                        break
-                    # Проверка соответствует ли тип переменной
-                    else if arguments[ i ] && arguments[ i ].constructor != type
-                        found = false
-                        break
+                if found
+                    for type, i in overargs
+                        # Проверка допускается ли любой тип переменной
+                        if type.constructor == String && type.toLowerCase() == 'any'
+                            break
+                        # Проверка соответствует ли тип переменной
+                        else if arguments[ i ] && arguments[ i ].constructor != type
+                            found = false
+                            break
+
+                # Проверка на check значения
+                if found && overload?.check?
+                    for checkVal, i in overload.check
+                        # Проверка регулярным выражением
+                        if checkVal instanceof RegExp
+                            if !checkVal.test( arguments[ i ] )
+                                found = false
+                                break
+                        # Пользовательская функция
+                        else if checkVal instanceof Function
+                            if !checkVal( arguments[ i ] )
+                                found = false
+                                break
+                        # Проверка по значению
+                        else 
+                            if arguments[ i ] != checkVal
+                                found = false
+                                break
+
             else
                 found = false
 
