@@ -30,7 +30,8 @@ var say = overlord([
             String, 
             Number, 
             Array
-        ], check: [
+        ],
+        check: [
             /^S/, 
             7, 
             function(arr) {
@@ -199,7 +200,7 @@ var say = overlord([
 ------------------------------------
 
 ## Changelog
-### 1.1.0 [ `Stable` ]
+### 1.1.2 [ `Stable` ]
 * `Add` - property of overload `check`. It may be a expected value, regular expression or checking function of verifiable argument. [Example](#innovations-in-version)
 * `Add` - `func` alias for `function` property of overload.
 * `Add` - throw error when overload property `func|function` or `args` not set

@@ -1,6 +1,6 @@
 {
   "name": "overlord-js",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "function overloading",
   "main": "overlord.js",
   "author": {
@@ -23,11 +23,12 @@
     "gulpfile.js"
   ],
   "files": [
+    "overlord.js",
+    "gulpfile.js",
     "_development",
     "browser",
     "test",
-    "docs",
-    "gulpfile.js"
+    "docs"
   ],
   "directories": {
     "src": "_development",
