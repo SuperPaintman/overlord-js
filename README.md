@@ -193,6 +193,7 @@ var say = overlord([
     func: function(name, age, games) {
         // ...
     }
+])
 ```
 
 ------------------------------------
